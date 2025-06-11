@@ -1,0 +1,27 @@
+<project name="MoodleRegistration" default="all" basedir=".">
+
+  <target name="hello">
+    <echo message="Hello World"/>
+  </target>
+
+  <target name="generate-xml">
+    <exec executable="python3">
+      <arg value="to_xml.py"/>
+    </exec>
+  </target>
+
+  <target name="validate" depends="generate-xml">
+    <exec executable="xmllint">
+      <arg value="--noout"/>
+      <arg value="--schema"/>
+      <arg value="schema.xsd"/>
+      <arg value="users.xml"/>
+    </exec>
+  </target>
+
+  <target name="transform" depends="validate">
+    <xslt in="users.xml" out="users.sql" style="transform.xslt"/>
+  </target>
+
+  <target name="all" depends="hello, generate-xml, validate, transform"/>
+</project>

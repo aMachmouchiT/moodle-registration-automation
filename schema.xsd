@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="users">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="user" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="id" type="xs:positiveInteger"/>
+              <xs:element name="username" type="xs:string"/>
+              <xs:element name="email">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30"/>
+                    <xs:pattern value=".+@.+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="firstname" type="xs:string"/>
+              <xs:element name="lastname" type="xs:string"/>
+              <xs:element name="idnumber" type="xs:positiveInteger"/>
+              <xs:element name="password">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:minLength value="8"/>
+                    <xs:pattern value="(?=.*[A-Z])(?=.*\d).+"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="city" type="xs:string"/>
+              <xs:element name="country" type="xs:string"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>
